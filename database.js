@@ -17,24 +17,27 @@ import {getDatabase, set, get,update,remove,ref,runTransaction,child,onValue}
 	const db=getDatabase();
 	const dbref=ref(db);
 	
-async function updateRequestState(requestid,newState) 
-{
-	const targetPath = "requests/"+requestid;
-	const updates = 
+	const shipRef = ref(db, "ships");
+	onValue(shipRef, (snapshot) => 
 	{
-		state: newState
-	};
-
-	try 
-	{
-		await update(ref(db, targetPath), updates);
-		console.log("State successfully updated in Realtime Database.");
-	} 
-	catch (error) 
-	{
-		console.error("Error updating state: ", error);
-	}
-}
+		if (snapshot.exists()) 
+		{
+			const data = snapshot.val();
+			const keys = Object.keys(data);
+			let i = 0;
+			while (i < keys.length) 
+			{
+				const key = keys[i];
+				const item = data[key];
+				loadRequests();
+				var searchship=document.getElementById("searchship");
+				if(searchship!=null)searchship.value="";
+				i++;
+			}
+		} else {
+			console.log("No data available");
+		}
+	});
 
 function saveDriver(owner,user,pass)
 {
@@ -64,19 +67,29 @@ function loadCart(shipid)
 			const data = snapshot.val();
 			const keys = Object.keys(data);
 			let i = 0;
-			let inner1="<section><div class='tbl-header'><table><thead><tr><th>التاريخ</th><th>العنوان</th><th>رقم الزبون</th><th>الزبون</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
+			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>العنوان</th><th>رقم الزبون</th><th>الزبون</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
 			let inner3="</tbody></table></div></section>";
 			let inner2="";
+			var status="";
+			var driver="";
 			while (i < keys.length) 
 			{
 				const key = keys[i];
 				const item = data[key];
 				if(shipid==item.shipnumber||shipid==-1)
 				{
-					inner2+="<tr><td>"+item.date+"</td><td>"+item.deliverycustomeraddress+"</td><td>"+item.deliverycustomerphones+"</td><td>"+item.deliverycustomername
+					if(item.state==1)status="واصل";
+					else if(item.state==2)status="ملغى";
+					else if(item.state==3)status="مؤجل";
+					else if(item.state==4)status="ملغى لم يدفع ديلفري";
+					else if(item.state==5)status="ملغى تم دفع ديلفري";
+					else status="-";
+					if(item.drivername!="-")driver=item.drivername;
+					else if(item.contractorname!="-")driver=item.contractorname;
+					else driver="-";
+					inner2+="<tr><td>"+status+"</td><td>"+item.date+"</td><td>"+item.deliverycustomeraddress+"</td><td>"+item.deliverycustomerphones+"</td><td>"+item.deliverycustomername
 +"</td><td>"+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
-priceleb)+"</td><td>"+item.
-drivername+"</td><td>"+item.companyname+"</td><td>"+item.shipnumber
+priceleb)+"</td><td>"+driver+"</td><td>"+item.companyname+"</td><td>"+item.shipnumber
 +"</td></tr>";
 				}
 				i++;
