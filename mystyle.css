@@ -375,11 +375,12 @@ div#details
 }
 .searchship
 {
-  width:10vw;
-  height:3vw;
-  border-radius: 0.5vw;
-  background-color: #ddd;
-  outline: none;
+	width:10vw;
+	height:3vw;
+	border-radius: 0.5vw;
+	background-color: #ddd;
+	outline: none;
+	font-size:clamp(0.4rem, 1vw, 2rem);
 }
 /* Add styles to the form container */
 .form-container {

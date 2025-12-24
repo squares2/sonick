@@ -26,3 +26,25 @@ function checkForm2()
 		return false;
 	}	
 }
+function numberComma(number)
+{
+	var result="";
+	var count=0;
+	if(number.length<=3)result=""+number;
+	else
+	{
+		result="";
+		var txt=""+number;
+		for(let i=txt.length-1;i>=0;i--)
+		{
+			if(count==3)
+			{
+				result=","+result;
+				count=0;
+			}
+			result=txt.charAt(i)+result;
+			count++;
+		}
+	}
+	return result;
+}
