@@ -4,7 +4,7 @@
 	{
 		font-family:Sakkal Majalla;
 		font-size: 3.2vw;
-		background-image: url('png/background.png');
+		background-image: linear-gradient(144deg,#373a34, #84b65b 50%,#c1ee1f);
 		background-repeat:  repeat;
 		background-attachment:fixed;
 		background-size: 100% 100%;
