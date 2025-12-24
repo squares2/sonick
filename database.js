@@ -117,7 +117,7 @@ function loginDriver()
 				{
 					const key = keys[i];
 					const item = data[key];
-					if(username.value==item.username&&password.value==item.password)
+					if(username.value.toLowerCase()==item.username.toLowerCase()&&password.value==item.password)
 					{
 						hideForm2();
 						success=true;
