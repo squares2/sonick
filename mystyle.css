@@ -1,0 +1,587 @@
+@media screen and (min-width: 240px) 
+{
+	body 
+	{
+		font-family:Sakkal Majalla;
+		font-size: 3.2vw;
+		background-image: url('png/background.png');
+		background-repeat:  repeat;
+		background-attachment:fixed;
+		background-size: 100% 100%;
+		width: 95vw;
+		height: 95vh;
+	}
+
+	div#main 
+	{
+		font-size: 3vw;
+	}
+}
+div#details
+{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:left;
+	margin-left:-40px;
+	margin-right:-10px;
+}
+.deliverycost 
+{
+	font-size:clamp(0.4rem, 2vw, 2rem);
+	color:red;
+}
+.deliverycost2
+{
+	font-size:clamp(0.4rem, 1.6vw, 2rem);
+	color:red;
+}
+.empty-request 
+{
+	font-size:clamp(0.4rem, 2vw, 2rem);
+	width:5vw;
+	height:4vw;
+	position:relative;
+	top:0vw;
+	left:5vw;
+	border: none;
+	color: rgb(255, 255, 255);
+	background: #111;
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
+	border-radius:3vw;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+}
+
+.driver-login 
+{
+	position:fixed;
+	top: 0vh;
+	right: 0vw;
+	align-items: center;
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+	border: 0;
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.5vw, 2rem);
+	width: 14vw;
+	height:4vw;
+	text-decoration: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	white-space: nowrap;
+	cursor: pointer;
+	z-index: 9999999999;
+}
+
+.driver-login:active,
+.driver-login:hover 
+{
+	color:green;
+	font-weight:800;
+	outline: 0;
+}
+.deliver1 
+{
+	position:fixed;
+	top: 1vh;
+	left: 15vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#525050, #363636 50%,#5c5d5e);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.2vw, 1.5rem);
+	width: 6vw;
+	height:4vw;
+	z-index: 9999999999;
+}
+.deliver12
+{
+	position:fixed;
+	top: 1vh;
+	left: 15vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#cae327, #12701a 50%,#40ff9c);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.2vw, 1.5rem);
+	width: 6vw;
+	height:4vw;
+	z-index: 9999999999;
+}
+.deliver2
+{
+	position:fixed;
+	top: 1vh;
+	left: 8vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#525050, #363636 50%,#5c5d5e);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.2vw, 1.5rem);
+	width: 6vw;
+	height:4vw;
+	z-index: 9999999999;
+}
+.deliver22
+{
+	position:fixed;
+	top: 1vh;
+	left: 8vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.2vw, 1.5rem);
+	width: 6vw;
+	height:4vw;
+	z-index: 9999999999;
+}
+.deliver3
+{
+	position:fixed;
+	top: 1vh;
+	left: 1vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#525050, #363636 50%,#5c5d5e);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.3vw, 1.5rem);
+	width: 6vw;
+	height:4vw;
+	z-index: 9999999999;
+}
+.deliver32
+{
+	position:fixed;
+	top: 1vh;
+	left: 1vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#f940ff, #bd0606 50%,#eb0079);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.3vw, 1.5rem);
+	width: 6vw;
+	height:4vw;
+	z-index: 9999999999;
+}
+.total_bill 
+{
+	position:fixed;
+	top: 1vh;
+	left: 23.4vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.5vw, 2rem);
+	width: 22vw;
+	height:4vw;
+	z-index: 9999999999;
+}
+.address_bill 
+{
+	position:fixed;
+	top: 1vh;
+	left: 48vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.2vw, 2rem);
+	width: 26vw;
+	height:5vw;
+	z-index: 9999999999;
+}
+.page_close1
+{
+	position:fixed;
+	top: 1vh;
+	right: 30vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#f940ff, #bd0606 50%,#eb0079);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 3vw, 6rem);
+	width: 40vw;
+	height:5vw;
+	z-index: 9999999999;
+}
+.page_close2
+{
+	position:fixed;
+	top: 30vh;
+	right: 30vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#f940ff, #bd0606 50%,#eb0079);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 3.5vw, 6rem);
+	width: 40vw;
+	height:20vw;
+	z-index: 9999999999;
+}
+.logo_close
+{
+	position:fixed;
+	top: 1vh;
+	right: 1vw;
+	text-align: center;
+	vertical-align: middle;
+	background-image: linear-gradient(144deg,#7c7bdb, #31d9df 50%,#0f3e97);
+	border-radius: 1vw;
+	color: #FFFFFF;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 3.5vw, 6rem);
+	width: 20vw;
+	height:14vw;
+	z-index: 9999999999;
+}
+
+.message-label 
+{
+	background-color: #4CAF50; /* Green background for success */
+	color: white;
+	font-size: 0.7em;
+	border-radius: 10vw;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	opacity: 1;
+	transition: opacity 1s ease-out; /* Smooth transition for fading */
+	text-align: center;
+	position: fixed; /* Essential: Positions the element relative to the browser window */
+	top: 10px;
+	right: 0px;
+	z-index: 9999999999;
+	display:none;
+}
+.message-label.hidden 
+{
+	opacity: 0;
+}
+.message-label2
+{
+	background-color: #ED1C24; /* Green background for success */
+	color: white;
+	font-size: 0.7em;
+	border-radius: 5vw;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	opacity: 1;
+	transition: opacity 1s ease-out; /* Smooth transition for fading */
+	text-align: center;
+	position: fixed; /* Essential: Positions the element relative to the browser window */
+	top: 1vw;
+	right: 8vw;
+	z-index: 9999999999;
+	display:none;
+}
+.message-label2.hidden 
+{
+	opacity: 0;
+}
+
+.imagecart:hover 
+{
+	cursor: pointer;
+}
+.emptycart:hover 
+{
+	cursor: pointer;
+}
+.imagecart 
+{
+	width:8vw;
+	margin-left:2vw;
+	margin-right:8vwpx;
+	margin-top:10px;
+}
+.round
+{
+	position:relative;
+	margin-left:-3vw;
+	top:1vw;
+}
+.items
+{
+	color:WHITE;
+	position:relative;
+	left:0.3vw;
+	top:-0.16vw;
+}
+.emptycart 
+{
+	width:6vw;
+	margin-left:1vw;
+	margin-top:0px;
+}
+.cart
+{
+	position:absolute;
+	top: 0;
+	left: 0;
+}
+.order
+{
+	position:absolute;
+	left:0vw;
+	width:12vw;
+	display:none;
+}
+.logo
+{
+	width:10vw;
+	margin-left:13vw;
+	margin-top:2vw;
+}
+.logo2
+{
+	font-size:clamp(0.4rem, 1.5vw, 2rem);
+	width:10vw;
+	margin-top:4vw;
+}
+.form-popup 
+{
+  display: none;
+  position: fixed;
+  top: 1vw;
+  right: 3vw;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  border: none;
+}
+.searchship
+{
+  width:10vw;
+  height:3vw;
+  border-radius: 0.5vw;
+  background-color: #ddd;
+  outline: none;
+}
+/* Add styles to the form container */
+.form-container {
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 2vw;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 50%;
+  height:8%;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 1vw;
+  margin-top:1vw;
+}
+.form-container label 
+{
+  font-size:clamp(0.8rem, 2.5vw, 2rem);
+}
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  margin-top:1vw;
+  background-color: #04AA6D;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height:8vh;
+  border-radius: 10vw;
+  margin-bottom:0.5vh;
+  opacity: 0.8;
+}
+.form-container .btn2 {
+  margin-top:1vw;
+  background-color: #C3C3C3;
+  color: white;
+  border: none;
+  width: 100%;
+  height:8vh;
+  border-radius: 10vw;
+  margin-bottom:0.5vh;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+input[type="submit"]{
+  width: 50px;
+}
+.mobile-container 
+{
+  max-width: auto;
+  margin: auto;
+  background-color: transparent;
+  height: auto;
+  color: black;
+  border-radius: 10px;
+}
+.request_section
+{
+	max-height: 40vh; /* Adjust this value as needed, e.g., calc(100vh - 50px) if you have a header */
+	overflow-y: auto;
+}
+.topnav 
+{	
+	font-size:clamp(0.8rem, 2.5vw, 2rem);
+	position: fixed;
+	top:1vw;
+	right: 4px;
+	z-index:2;
+	overflow: hidden;
+	background-color: #35616e;
+	width:15%;
+	height:100%;
+	border-radius:0.5vw;
+}
+.category 
+{
+	font-family: Sakkal Majalla;
+	direction: rtl;
+	text-align: center;
+	width: fit-content;
+	display: inline-block;
+	border-radius: 2vw;
+	margin: 2px;
+    padding: 0px; /* Removes default padding */
+	font-size: clamp(0.5rem, 2.3vw, 3rem);
+	height: 80%; /* Adjust this value as needed */
+	overflow-y: auto;
+}
+
+.page
+{
+	position:absolute;
+	top:1vh;
+	right:13vw;
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+	width: 90%;
+	height: auto;
+}
+.container
+{
+	position:relative;
+	width:auto;
+	height:auto;
+}
+a:link 
+{
+	text-decoration: none;
+}
+.topnav a.icon 
+{
+  float: right;
+}
+.topnav a:hover 
+{
+  color: black;
+}
+.category li a {
+  color: #FFFFFF!important;
+	border-radius: 5px;
+}
+
+.category li:hover a {
+  color: #5ced3b!important;
+	border-radius:5px;
+}
+
+.category li a.active 
+{
+	font-size: clamp(0.5rem, 2vw, 2rem);
+	color: #5ced3b!important;
+	border-radius: 5px;
+	font-family: Sakkal Majalla;
+	direction: rtl;
+	text-align: center;
+	display: inline-block;
+    padding: 0px; /* Removes default padding */
+
+}
+.topnav div a.active
+{
+	color: white;
+	font-size: clamp(0.5rem, 2.5vw, 2rem);
+}
+
+.category li
+{
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    display: inline-block;
+	border-radius: 0.5vw;
+	color:#FFFFFF;
+    margin-right: 1vh; /* Adds spacing between list items */
+	font-size: clamp(0.5rem, 4vh, 4rem);
+	margin-bottom: 1px;
+}
+.category0 
+{
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    display: inline-block;
+	border-radius: 0.5vw;
+	color:#FFFFFF;
+    margin-right: 1vh; /* Adds spacing between list items */
+	font-size: clamp(0.5rem, 2vw, 2rem);
+	margin-bottom: 2px;
+}
+.category1 
+{
+	background-image: linear-gradient(144deg,#cae327, #12701a 50%,#40ff9c);
+    display: inline-block;
+	border-radius: 0.5vw;
+	color:#FFFFFF;
+    margin-right: 1vh; /* Adds spacing between list items */
+	font-size: clamp(0.5rem, 2vw, 2rem);
+	margin-bottom: 2px;
+}
+.category2 
+{
+	background-image: linear-gradient(144deg,#f940ff, #bd0606 50%,#eb0079);
+    display: inline-block;
+	border-radius: 0.5vw;
+	color:#FFFFFF;
+    margin-right: 1vh; /* Adds spacing between list items */
+	font-size: clamp(0.5rem, 2vw, 2rem);
+	margin-bottom: 2px;
+}
