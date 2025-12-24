@@ -1,3 +1,12 @@
+@font-face 
+{
+    font-family: 'Sakkal Majalla';
+    src: url('fonts/sakkal-majalla.woff2') format('woff2'),
+         url('fonts/sakkal-majalla.ttf') format('truetype'); /* Fallback */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Improves loading performance */
+}
 @media screen and (min-width: 240px) 
 {
 	body 
