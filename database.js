@@ -113,7 +113,7 @@ function loadCart(shipid)
 					else if(item.contractorname!="-")driver=item.contractorname;
 					else driver="-";
 					inner2+="<tr><td class='"+classname+"'>"+status+"</td><td>"+item.date+"</td><td>"+item.deliverycustomeraddress+"</td><td>"+item.deliverycustomerphones+"</td><td>"+item.deliverycustomername
-+"</td><td>"+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
++"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
 priceleb)+"</td><td>"+driver+"</td><td>"+item.companyname+"</td><td>"+item.shipnumber
 +"</td></tr>";
 				}
