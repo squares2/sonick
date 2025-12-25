@@ -23,7 +23,7 @@ table{
 th{
 	padding: 20px 15px;
 	text-align: center;
-	font-weight: 700;
+	font-weight: 500;
 	font-size:clamp(0.3rem, 1.5vw, 3rem);
 	color: #fff;
 	text-transform: uppercase;
@@ -79,13 +79,12 @@ section{
 
 /* follow me template */
 .made-with-love {
-  margin-top: 40px;
-  padding: 10px;
-  clear: left;
-  text-align: center;
-  font-size: 10px;
-  font-family: Sakkal Majalla;
-  color: #fff;
+	margin-top: 40px;
+	padding: 10px;
+	clear: left;
+	text-align: center;
+	font-size: 10px;
+	font-family: 'Sakkal Majalla', sans-serif;  color: #fff;
 }
 .made-with-love i {
   font-style: Bold;
