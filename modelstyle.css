@@ -9,10 +9,10 @@ h1{
 table{
   width:100%;
   table-layout: fixed;
-	background-image: linear-gradient(144deg,#262e11, #b9c055 50%,#9c8f17);
+	background-image: linear-gradient(144deg,#219117, #304434 50%,#310c0f);
 }
 .tbl-header{
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.9);
  }
 .tbl-content{
   height:70vh;
@@ -23,7 +23,7 @@ table{
 th{
 	padding: 20px 15px;
 	text-align: center;
-	font-weight: 500;
+	font-weight: 700;
 	font-size:clamp(0.3rem, 1.5vw, 3rem);
 	color: #fff;
 	text-transform: uppercase;
@@ -32,13 +32,38 @@ td{
   padding: 15px;
   text-align: center;
   vertical-align:middle;
-  font-weight: 300;
+  font-weight: 600;
 	font-size:clamp(0.3rem, 1.2vw, 3rem);
   color: #fff;
   border-bottom: solid 1px rgba(255,255,255,0.9);
 }
 
-
+td.style0
+{
+	background:white;
+	color:black;
+	font-size:clamp(0.5rem, 4vw, 5rem);
+}
+td.style1
+{
+	background:#00B050;
+}
+td.style2
+{
+	background:red;
+}
+td.style3
+{
+	background:#4F81BD;
+}
+td.style4
+{
+	background:#F79646;
+}
+td.style5
+{
+	background:#E3DE00;
+}
 /* demo styles */
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
@@ -59,11 +84,11 @@ section{
   clear: left;
   text-align: center;
   font-size: 10px;
-  font-family: arial;
+  font-family: Sakkal Majalla;
   color: #fff;
 }
 .made-with-love i {
-  font-style: normal;
+  font-style: Bold;
   color: #F50057;
   font-size: 14px;
   position: relative;
