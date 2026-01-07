@@ -384,6 +384,17 @@ div#details
 	outline: none;
 	font-size:clamp(0.4rem, 1.3vw, 2rem);
 }
+.searchphone
+{
+	text-align: center;
+	margin-top:8vh;
+	width:13vw;
+	height:5vw;
+	border-radius: 0.5vw;
+	background-color: #ddd;
+	outline: none;
+	font-size:clamp(0.4rem, 1.3vw, 2rem);
+}
 /* Add styles to the form container */
 .form-container {
   width: 100%;

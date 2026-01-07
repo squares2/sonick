@@ -32,6 +32,8 @@ import {getDatabase, set, get,update,remove,ref,runTransaction,child,onValue}
 				loadRequests();
 				var searchship=document.getElementById("searchship");
 				if(searchship!=null)searchship.value="";
+				var searchphone=document.getElementById("searchphone");
+				if(searchphone!=null)searchphone.value="";
 				i++;
 			}
 		} else {
@@ -55,6 +57,8 @@ function loadRequests()
 		document.getElementById("driver-logout").style.display="block";
 		var searchship=document.getElementById("searchship");
 		if(searchship!=null)searchship.style.display="block";
+		var searchphone=document.getElementById("searchphone");
+		if(searchphone!=null)searchphone.style.display="block";
 		loadCart(-1);
 	}
 }
@@ -78,6 +82,72 @@ function loadCart(shipid)
 				const key = keys[i];
 				const item = data[key];
 				if(shipid==item.shipnumber||shipid==-1)
+				{
+					if(item.state==1)
+					{
+						status="واصل";
+						classname="style1";
+					}	
+					else if(item.state==2)
+					{
+						status="ملغى";
+						classname="style2";
+					}	
+					else if(item.state==3)
+					{
+						status="مؤجل";
+						classname="style3";
+					}	
+					else if(item.state==4)
+					{
+						status="ملغى لم يدفع ديلفري";
+						classname="style4";
+					}	
+					else if(item.state==5)
+					{
+						status="ملغى تم دفع ديلفري";
+						classname="style5";
+					}	
+					else 
+					{
+						status="-";
+						classname="style0";
+					}	
+					if(item.drivername!="-")driver=item.drivername;
+					else if(item.contractorname!="-")driver=item.contractorname;
+					else driver="-";
+					inner2+="<tr><td class='"+classname+"'>"+status+"</td><td>"+item.date+"</td><td>"+item.deliverycustomeraddress+"</td><td>"+item.deliverycustomerphones+"</td><td>"+item.deliverycustomername
++"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
+priceleb)+"</td><td>"+driver+"</td><td>"+item.companyname+"</td><td>"+item.shipnumber
++"</td></tr>";
+				}
+				i++;
+			}
+			var page=document.getElementById("page");
+			page.innerHTML=inner1+inner2+inner3;
+		}
+	});
+}
+function loadCart2(phonenumber)
+{
+	get(child(dbref,"ships")).then((snapshot) => 
+	{
+		if (snapshot.exists()) 
+		{
+			const data = snapshot.val();
+			const keys = Object.keys(data);
+			let i = 0;
+			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>العنوان</th><th>رقم الزبون</th><th>الزبون</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
+			let inner3="</tbody></table></div></section>";
+			let inner2="";
+			var status="";
+			var driver="";
+			var classname="";
+			while (i < keys.length) 
+			{
+				const key = keys[i];
+				const item = data[key];
+				if(phonenumber==item.deliverycustomerphones||phonenumber==-1)
 				{
 					if(item.state==1)
 					{
@@ -152,6 +222,8 @@ function loginDriver()
 						document.getElementById("page").innerHTML="";
 						var searchship=document.getElementById("searchship");
 						if(searchship!=null)searchship.style.display="block";
+						var searchphone=document.getElementById("searchphone");
+						if(searchphone!=null)searchphone.style.display="block";
 					}
 					i++;
 				}
@@ -177,9 +249,16 @@ document.addEventListener('keyup', function(event)
 {
     if (event.target && event.target.id === 'searchship') 
 	{
-        
+        document.getElementById("searchphone").value="";
         const text = event.target.value;
         if(text.length>0)loadCart(parseInt(text));
+		else loadCart(-1);
+    }
+    else if (event.target && event.target.id === 'searchphone') 
+	{
+        document.getElementById("searchship").value="";
+        const text = event.target.value;
+        if(text.length>0)loadCart2(parseInt(text));
 		else loadCart(-1);
     }
 });
