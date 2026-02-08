@@ -17,7 +17,7 @@ import {getDatabase, set, get,update,remove,ref,runTransaction,child,onValue}
 	const db=getDatabase();
 	const dbref=ref(db);
 	
-	const shipRef = ref(db, "ships");
+	const shipRef = ref(db, "archives");
 	onValue(shipRef, (snapshot) => 
 	{
 		if (snapshot.exists()) 
@@ -40,7 +40,6 @@ import {getDatabase, set, get,update,remove,ref,runTransaction,child,onValue}
 			console.log("No data available");
 		}
 	});
-
 function saveDriver(owner,user,pass)
 {
 	localStorage.setItem('owner',owner);
@@ -64,17 +63,25 @@ function loadRequests()
 }
 function loadCart(shipid)
 {
-	get(child(dbref,"ships")).then((snapshot) => 
+	get(child(dbref,"archives")).then((snapshot) => 
 	{
 		if (snapshot.exists()) 
 		{
 			const data = snapshot.val();
 			const keys = Object.keys(data);
+			
+			var pagenum=document.getElementById("pagenum");
+			var pages=parseInt(keys.length/100);
+			if(keys.length<=100)pages=1;
+			else if(keys.length%100>0)pages++;
+			if(shipid==-1)pagenum.innerHTML="1/"+pages;
+			else pagenum.innerHTML="-/-";
+			localStorage.setItem('pages',pages);
+
 			let i = 0;
-			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>العنوان</th><th>رقم الزبون</th><th>الزبون</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
+			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
 			let inner3="</tbody></table></div></section>";
 			let inner2="";
-			var status="";
 			var driver="";
 			var classname="";
 			while (i < keys.length) 
@@ -83,41 +90,17 @@ function loadCart(shipid)
 				const item = data[key];
 				if(shipid==item.shipnumber||shipid==-1)
 				{
-					if(item.state==1)
-					{
-						status="واصل";
-						classname="style1";
-					}	
-					else if(item.state==2)
-					{
-						status="ملغى";
-						classname="style2";
-					}	
-					else if(item.state==3)
-					{
-						status="مؤجل";
-						classname="style3";
-					}	
-					else if(item.state==4)
-					{
-						status="ملغى لم يدفع ديلفري";
-						classname="style4";
-					}	
-					else if(item.state==5)
-					{
-						status="ملغى تم دفع ديلفري";
-						classname="style5";
-					}	
-					else 
-					{
-						status="-";
-						classname="style0";
-					}	
+					if(item.state=="واصل")classname="style1";
+					else if(item.state=="ملغى")classname="style2";
+					else if(item.state=="مؤجل")classname="style3";
+					else if(item.state=="ملغى لم يدفع ديلفري")classname="style4";
+					else if(item.state=="ملغى تم دفع ديلفري")classname="style5";
+					else classname="style0";
+
 					if(item.drivername!="-")driver=item.drivername;
 					else if(item.contractorname!="-")driver=item.contractorname;
 					else driver="-";
-					inner2+="<tr><td class='"+classname+"'>"+status+"</td><td>"+item.date+"</td><td>"+item.deliverycustomeraddress+"</td><td>"+item.deliverycustomerphones+"</td><td>"+item.deliverycustomername
-+"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
+					inner2+="<tr><td class='"+classname+"'>"+item.state+"</td><td>"+item.date+"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
 priceleb)+"</td><td>"+driver+"</td><td>"+item.companyname+"</td><td>"+item.shipnumber
 +"</td></tr>";
 				}
@@ -130,60 +113,46 @@ priceleb)+"</td><td>"+driver+"</td><td>"+item.companyname+"</td><td>"+item.shipn
 }
 function loadCart2(phonenumber)
 {
-	get(child(dbref,"ships")).then((snapshot) => 
+	get(child(dbref,"archives")).then((snapshot) => 
 	{
 		if (snapshot.exists()) 
 		{
+			var pagepos=document.getElementById("searchphone");
 			const data = snapshot.val();
 			const keys = Object.keys(data);
+			
+			var pagenum=document.getElementById("pagenum");
+			pagenum.innerHTML=pagepos.value+"/"+localStorage.getItem('pages');
+			
+			
 			let i = 0;
-			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>العنوان</th><th>رقم الزبون</th><th>الزبون</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
+			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
 			let inner3="</tbody></table></div></section>";
 			let inner2="";
-			var status="";
 			var driver="";
 			var classname="";
+			var min=0;
+			var max=0;
+			var currentpage=parseInt(pagepos.value);
+			min=(currentpage-1)*100;
+			max=currentpage*100;
 			while (i < keys.length) 
 			{
 				const key = keys[i];
 				const item = data[key];
-				if(phonenumber==item.deliverycustomerphones||phonenumber==-1)
+				if(i>=min&&i<max)
 				{
-					if(item.state==1)
-					{
-						status="واصل";
-						classname="style1";
-					}	
-					else if(item.state==2)
-					{
-						status="ملغى";
-						classname="style2";
-					}	
-					else if(item.state==3)
-					{
-						status="مؤجل";
-						classname="style3";
-					}	
-					else if(item.state==4)
-					{
-						status="ملغى لم يدفع ديلفري";
-						classname="style4";
-					}	
-					else if(item.state==5)
-					{
-						status="ملغى تم دفع ديلفري";
-						classname="style5";
-					}	
-					else 
-					{
-						status="-";
-						classname="style0";
-					}	
+					if(item.state=="واصل")classname="style1";
+					else if(item.state=="ملغى")classname="style2";
+					else if(item.state=="مؤجل")classname="style3";
+					else if(item.state=="ملغى لم يدفع ديلفري")classname="style4";
+					else if(item.state=="ملغى تم دفع ديلفري")classname="style5";
+					else classname="style0";
+
 					if(item.drivername!="-")driver=item.drivername;
 					else if(item.contractorname!="-")driver=item.contractorname;
 					else driver="-";
-					inner2+="<tr><td class='"+classname+"'>"+status+"</td><td>"+item.date+"</td><td>"+item.deliverycustomeraddress+"</td><td>"+item.deliverycustomerphones+"</td><td>"+item.deliverycustomername
-+"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
+					inner2+="<tr><td class='"+classname+"'>"+item.state+"</td><td>"+item.date+"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
 priceleb)+"</td><td>"+driver+"</td><td>"+item.companyname+"</td><td>"+item.shipnumber
 +"</td></tr>";
 				}
