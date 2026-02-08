@@ -88,11 +88,11 @@ div#details
 .pagenum
 {
 	position:fixed;
-	width: 7vw;
+	width: 14vw;
+	height:4vw;
 	font-family: Times New Roman, sans-serif;
-	font-size:clamp(0.4rem, 1.2vw, 1.5rem);
+	font-size:clamp(0.6rem, 1.6vw, 2rem);
 	border-radius:1vw;
-	height:3vw;
 	align-items: center;
 	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
 	top: 0.5vh;
