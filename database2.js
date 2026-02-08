@@ -12,7 +12,7 @@ const firebaseConfig =
 };
 
 const app = initializeApp(firebaseConfig);	
-import {getDatabase, set, get,update,remove,ref,runTransaction,child,onValue}
+import {getDatabase, set, get,update,remove,ref,runTransaction,child,onValue,query,orderByChild,equalTo}
 	from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
 	const db=getDatabase();
 	const dbref=ref(db);
@@ -25,18 +25,21 @@ import {getDatabase, set, get,update,remove,ref,runTransaction,child,onValue}
 			const data = snapshot.val();
 			const keys = Object.keys(data);
 			let i = 0;
-			while (i < keys.length) 
-			{
-				const key = keys[i];
-				const item = data[key];
-				loadRequests();
-				var searchship=document.getElementById("searchship");
-				if(searchship!=null)searchship.value="";
-				var searchphone=document.getElementById("searchphone");
-				if(searchphone!=null)searchphone.value="";
-				i++;
-			}
-		} else {
+			var searchship=document.getElementById("searchship");
+			if(searchship!=null)searchship.value="";
+			var searchphone=document.getElementById("searchphone");
+			if(searchphone!=null)searchphone.value="";
+			
+			var pagenum=document.getElementById("pagenum");
+			var pages=parseInt(keys.length/100);
+			if(keys.length<=100)pages=1;
+			else if(keys.length%100>0)pages++;
+			localStorage.setItem('pages',pages);
+			
+			loadRequests();
+		} 
+		else 
+		{
 			console.log("No data available");
 		}
 	});
@@ -58,60 +61,59 @@ function loadRequests()
 		if(searchship!=null)searchship.style.display="block";
 		var searchphone=document.getElementById("searchphone");
 		if(searchphone!=null)searchphone.style.display="block";
-		loadCart(-1);
+		searchphone.value="1";
 	}
 }
-function loadCart(shipid)
+function loadShip(shipnum)
 {
-	get(child(dbref,"archives")).then((snapshot) => 
+	const db = getDatabase();
+	const archivesRef = ref(db, "archives");
+	const shipQuery = query(archivesRef, orderByChild("shipnumber"), equalTo(""+shipnum));
+	get(shipQuery).then((snapshot) => 
 	{
 		if (snapshot.exists()) 
 		{
-			const data = snapshot.val();
-			const keys = Object.keys(data);
-			
-			var pagenum=document.getElementById("pagenum");
-			var pages=parseInt(keys.length/100);
-			if(keys.length<=100)pages=1;
-			else if(keys.length%100>0)pages++;
-			if(shipid==-1)pagenum.innerHTML="1/"+pages;
-			else pagenum.innerHTML="-/-";
-			localStorage.setItem('pages',pages);
-
 			let i = 0;
 			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
 			let inner3="</tbody></table></div></section>";
 			let inner2="";
 			var driver="";
 			var classname="";
-			while (i < keys.length) 
-			{
-				const key = keys[i];
-				const item = data[key];
-				if(shipid==item.shipnumber||shipid==-1)
-				{
-					if(item.state=="واصل")classname="style1";
-					else if(item.state=="ملغى")classname="style2";
-					else if(item.state=="مؤجل")classname="style3";
-					else if(item.state=="ملغى لم يدفع ديلفري")classname="style4";
-					else if(item.state=="ملغى تم دفع ديلفري")classname="style5";
-					else classname="style0";
 
-					if(item.drivername!="-")driver=item.drivername;
-					else if(item.contractorname!="-")driver=item.contractorname;
-					else driver="-";
-					inner2+="<tr><td class='"+classname+"'>"+item.state+"</td><td>"+item.date+"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
+			snapshot.forEach((childSnapshot) => 
+			{
+				const shipId = childSnapshot.key; // This is your shipid
+				const item = childSnapshot.val(); // This is the ship data (shipnumber, date)
+				
+				if(item.state=="واصل")classname="style1";
+				else if(item.state=="ملغى")classname="style2";
+				else if(item.state=="مؤجل")classname="style3";
+				else if(item.state=="ملغى لم يدفع ديلفري")classname="style4";
+				else if(item.state=="ملغى تم دفع ديلفري")classname="style5";
+				else classname="style0";
+
+				if(item.drivername!="-")driver=item.drivername;
+				else if(item.contractorname!="-")driver=item.contractorname;
+				else driver="-";
+				inner2+="<tr><td class='"+classname+"'>"+item.state+"</td><td>"+item.date+"</td><td>$ "+item.returnedvalue+"</td><td>$ "+item.pricedol+"</td><td>L.L. "+numberComma(item.
 priceleb)+"</td><td>"+driver+"</td><td>"+item.companyname+"</td><td>"+item.shipnumber
 +"</td></tr>";
-				}
-				i++;
-			}
+			});
 			var page=document.getElementById("page");
 			page.innerHTML=inner1+inner2+inner3;
+			var pagenum=document.getElementById("pagenum");
+			pagenum.innerHTML="-/-";
+		} 
+		else 
+		{
+			console.log("No ship found with that number.");
 		}
+	}).catch((error) => 
+	{
+		console.error("Error searching for ship:", error);
 	});
 }
-function loadCart2(phonenumber)
+function loadPage()
 {
 	get(child(dbref,"archives")).then((snapshot) => 
 	{
@@ -124,8 +126,6 @@ function loadCart2(phonenumber)
 			var pagenum=document.getElementById("pagenum");
 			pagenum.innerHTML=pagepos.value+"/"+localStorage.getItem('pages');
 			
-			
-			let i = 0;
 			let inner1="<section><div class='tbl-header'><table><thead><tr><th>الحالة</th><th>التاريخ</th><th>القيمة المرتجعة</th><th>$ القيمة</th><th>L.L. القيمة </th><th>السائق/المتعهد</th><th>الشركة</th><th>رقم الطلبية</th></tr></thead></table></div><div class='tbl-content'><table><tbody>";
 			let inner3="</tbody></table></div></section>";
 			let inner2="";
@@ -136,11 +136,12 @@ function loadCart2(phonenumber)
 			var currentpage=parseInt(pagepos.value);
 			min=(currentpage-1)*100;
 			max=currentpage*100;
+			let i = min;
 			while (i < keys.length) 
 			{
 				const key = keys[i];
 				const item = data[key];
-				if(i>=min&&i<max)
+				if(i<max)
 				{
 					if(item.state=="واصل")classname="style1";
 					else if(item.state=="ملغى")classname="style2";
@@ -220,15 +221,13 @@ document.addEventListener('keyup', function(event)
 	{
         document.getElementById("searchphone").value="";
         const text = event.target.value;
-        if(text.length>0)loadCart(parseInt(text));
-		else loadCart(-1);
+        if(text.length>0)loadShip(parseInt(text));
     }
     else if (event.target && event.target.id === 'searchphone') 
 	{
         document.getElementById("searchship").value="";
         const text = event.target.value;
-        if(text.length>0)loadCart2(parseInt(text));
-		else loadCart(-1);
+        if(text.length>0)loadPage();
     }
 });
 document.addEventListener('DOMContentLoaded', () => 
@@ -272,3 +271,5 @@ document.addEventListener('DOMContentLoaded', () =>
 		});
 	}
 });
+document.addEventListener('DOMContentLoaded',loadPage);
+
