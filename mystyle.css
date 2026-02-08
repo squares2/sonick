@@ -88,9 +88,15 @@ div#details
 .pagenum
 {
 	position:fixed;
-	bottom: 0vh;
-	left: 39vw;
+	width: 7vw;
+	font-family: Times New Roman, sans-serif;
+	font-size:clamp(0.4rem, 1.2vw, 1.5rem);
+	border-radius:1vw;
+	height:3vw;
 	align-items: center;
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+	top: 0.5vh;
+	left: 40vw;
 	color:#38495E;
 	font-weight:600;
 }
