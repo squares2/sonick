@@ -89,15 +89,15 @@ div#details
 {
 	position:fixed;
 	width: 14vw;
-	height:4vw;
+	height:3vw;
 	font-family: Times New Roman, sans-serif;
-	font-size:clamp(0.6rem, 1.6vw, 2rem);
+	font-size:clamp(0.5rem, 1.5vw, 2rem);
 	border-radius:1vw;
 	align-items: center;
 	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
 	top: 0.5vh;
 	left: 40vw;
-	color:#38495E;
+	color:#FFFFFF;
 	font-weight:600;
 }
 .archive 
